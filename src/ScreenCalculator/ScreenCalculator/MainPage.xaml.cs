@@ -16,19 +16,27 @@ namespace ScreenCalculator
         public MainPage()
         {
             InitializeComponent();
+
+            pkrUnidade.SelectedIndex = 0;
         }
 
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            double cm = double.TryParse(txtPol.Text, out double valor) ? valor * 2.54 : 0;
+            double valorDiagPol = double.TryParse(txtPol.Text, out double valor) ? valor : 0;
+            double ValorDiagCm  = valorDiagPol * 2.54;
 
-            double escala = Math.Sqrt(Math.Pow(cm, 2) / (Math.Pow(16, 2) + Math.Pow(9, 2)));
+            string diagPol = valorDiagPol.ToString("N1");
+            string diagCm  = ValorDiagCm.ToString("N1");
 
-            double altura = escala * 9;
-            double largura = escala * 16;
+            string altPol  = (valorDiagPol * 0.49091).ToString("N1");
+            string largPol = (valorDiagPol * 0.87247).ToString("N1");
 
-            lblAltura.Text = "Altura: " + altura.ToString("N1") + "cm";
-            lblLargura.Text = "Largura: " + largura.ToString("N1") + "cm";
+            string altCm  = (ValorDiagCm * 0.49091).ToString("N1");
+            string largCm = (ValorDiagCm * 0.87247).ToString("N1");
+            
+            lblDiagonal.Text = $"{diagCm}cm {diagPol}\"";
+            lblAltura.Text   = $"{altCm}cm {altPol}\"";
+            lblLargura.Text  = $"{largCm}cm {largPol}\"";
         }
     }
 }
