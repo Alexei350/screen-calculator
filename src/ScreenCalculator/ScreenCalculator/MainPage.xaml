@@ -5,16 +5,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ScreenCalculator.MainPage">
-
     <StackLayout>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="200"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="auto"/>
@@ -24,20 +29,54 @@
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
-            <Entry Grid.Row="1" Grid.Column="1"
-                   x:Name="txtPol"
+            <Label Grid.Row="1" Grid.Column="1"
+                   Text="Diagonal:"
+                   FontSize="Large"
+                   VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+            <Entry Grid.Row="1" Grid.Column="3"
+                   x:Name="txtInput"
                    HorizontalTextAlignment="Center"
                    TextChanged="Entry_TextChanged"/>
+            <Picker Grid.Row="1" Grid.Column="5"
+                    x:Name="pkrUnidade"
+                    SelectedIndexChanged="pkrUnidade_SelectedIndexChanged">
+                <Picker.Items>
+                    <x:String>pol</x:String>
+                    <x:String>cm</x:String>
+                </Picker.Items>
+            </Picker>
 
             <Label Grid.Row="3" Grid.Column="1"
-                   x:Name="lblAltura"
-                   Text="Altura: -cm"
-                   HorizontalTextAlignment="Center"
+                   Text="Diagonal: "
+                   HorizontalTextAlignment="End" VerticalTextAlignment="Center"
                    FontSize="Large"/>
-            <Label Grid.Row="5" Grid.Column="1" 
+            <Label Grid.Row="3" Grid.Column="3"
+                   Grid.ColumnSpan="3"
+                   x:Name="lblDiagonal"
+                   Text="-cm"
+                   HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                   FontSize="Large"/>
+            
+            <Label Grid.Row="5" Grid.Column="1"
+                   Text="Altura: "
+                   HorizontalTextAlignment="End" VerticalTextAlignment="Center"
+                   FontSize="Large"/>
+            <Label Grid.Row="5" Grid.Column="3"
+                   Grid.ColumnSpan="3"
+                   x:Name="lblAltura"
+                   Text="-cm"
+                   HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                   FontSize="Large"/>
+
+            <Label Grid.Row="7" Grid.Column="1"
+                   Text="Largura: "
+                   HorizontalTextAlignment="End" VerticalTextAlignment="Center"
+                   FontSize="Large"/>
+            <Label Grid.Row="7" Grid.Column="3" 
+                   Grid.ColumnSpan="3"
                    x:Name="lblLargura"
-                   Text="Largura: -cm"
-                   HorizontalTextAlignment="Center"
+                   Text="-cm"
+                   HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
                    FontSize="Large"/>
         </Grid>
     </StackLayout>

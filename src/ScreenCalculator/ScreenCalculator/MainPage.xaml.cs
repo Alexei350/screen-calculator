@@ -16,19 +16,48 @@ namespace ScreenCalculator
         public MainPage()
         {
             InitializeComponent();
+
+            pkrUnidade.SelectedIndex = 0;
         }
 
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            double cm = double.TryParse(txtPol.Text, out double valor) ? valor * 2.54 : 0;
+            AtualizaValores();
+        }
 
-            double escala = Math.Sqrt(Math.Pow(cm, 2) / (Math.Pow(16, 2) + Math.Pow(9, 2)));
+        private void pkrUnidade_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AtualizaValores();
+        }
 
-            double altura = escala * 9;
-            double largura = escala * 16;
+        private void AtualizaValores()
+        {
+            double valorDiagPol;
+            double valorDiagCm;
 
-            lblAltura.Text = "Altura: " + altura.ToString("N1") + "cm";
-            lblLargura.Text = "Largura: " + largura.ToString("N1") + "cm";
+            if (pkrUnidade.SelectedIndex == 0)
+            {
+                valorDiagPol = double.TryParse(txtInput.Text, out double valor) ? valor : 0;
+                valorDiagCm = valorDiagPol * 2.54;
+            }
+            else
+            {
+                valorDiagCm = double.TryParse(txtInput.Text, out double valor) ? valor : 0;
+                valorDiagPol = valorDiagCm / 2.54;
+            }
+
+            string diagPol = valorDiagPol.ToString("N1");
+            string diagCm = valorDiagCm.ToString("N1");
+
+            string altPol = (valorDiagPol * 0.49091).ToString("N1");
+            string largPol = (valorDiagPol * 0.87247).ToString("N1");
+
+            string altCm = (valorDiagCm * 0.49091).ToString("N1");
+            string largCm = (valorDiagCm * 0.87247).ToString("N1");
+
+            lblDiagonal.Text = $"{diagCm}cm {diagPol}\"";
+            lblAltura.Text = $"{altCm}cm {altPol}\"";
+            lblLargura.Text = $"{largCm}cm {largPol}\"";
         }
     }
 }
