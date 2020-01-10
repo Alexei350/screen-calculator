@@ -34,11 +34,12 @@
                    FontSize="Large"
                    VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
             <Entry Grid.Row="1" Grid.Column="3"
-                   x:Name="txtPol"
+                   x:Name="txtInput"
                    HorizontalTextAlignment="Center"
                    TextChanged="Entry_TextChanged"/>
             <Picker Grid.Row="1" Grid.Column="5"
-                   x:Name="pkrUnidade">
+                    x:Name="pkrUnidade"
+                    SelectedIndexChanged="pkrUnidade_SelectedIndexChanged">
                 <Picker.Items>
                     <x:String>pol</x:String>
                     <x:String>cm</x:String>
