@@ -17,6 +17,7 @@ namespace ScreenCalculator
         {
             InitializeComponent();
 
+            pkrMedida.SelectedIndex = 0;
             pkrUnidade.SelectedIndex = 0;
         }
 
@@ -25,39 +26,61 @@ namespace ScreenCalculator
             AtualizaValores();
         }
 
-        private void pkrUnidade_SelectedIndexChanged(object sender, EventArgs e)
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
             AtualizaValores();
         }
 
         private void AtualizaValores()
         {
-            double valorDiagPol;
-            double valorDiagCm;
+            double input = double.TryParse(txtInput.Text, out double valor) ? valor : 0;
 
-            if (pkrUnidade.SelectedIndex == 0)
+            double valorDiagPol = 0, valorDiagCm = 0, valorAltPol = 0, valorAltCm = 0, valorLargPol = 0, valorLargCm = 0;
+
+            if (pkrUnidade.SelectedIndex == 1)
             {
-                valorDiagPol = double.TryParse(txtInput.Text, out double valor) ? valor : 0;
-                valorDiagCm = valorDiagPol * 2.54;
-            }
-            else
-            {
-                valorDiagCm = double.TryParse(txtInput.Text, out double valor) ? valor : 0;
-                valorDiagPol = valorDiagCm / 2.54;
+                input /= 2.54;
             }
 
-            string diagPol = valorDiagPol.ToString("N1");
+            switch (pkrMedida.SelectedIndex)
+            {
+                case 0:
+                    valorDiagPol = input;
+
+                    break;
+                case 1:
+                    valorAltPol = input;
+                    valorDiagPol = input * 2.0395;
+
+                    break;
+                case 2:
+                    valorLargPol = input;
+                    valorDiagPol = input * 1.152;
+
+                    break;
+            }
+
+            if (valorAltPol == 0)
+                valorAltPol = valorDiagPol * 0.49091;
+            if (valorLargPol == 0)
+                valorLargPol = valorDiagPol * 0.87247;
+
+            valorDiagCm = valorDiagPol * 2.54;
+            valorAltCm = valorAltPol * 2.54;
+            valorLargCm = valorLargPol * 2.54;
+
             string diagCm = valorDiagCm.ToString("N1");
+            string diagPol = valorDiagPol.ToString("N1");
 
-            string altPol = (valorDiagPol * 0.49091).ToString("N1");
-            string largPol = (valorDiagPol * 0.87247).ToString("N1");
+            string altCm = valorAltCm.ToString("N1");
+            string altPol = valorAltPol.ToString("N1");
 
-            string altCm = (valorDiagCm * 0.49091).ToString("N1");
-            string largCm = (valorDiagCm * 0.87247).ToString("N1");
+            string largPol = valorLargPol.ToString("N1");
+            string largCm = valorLargCm.ToString("N1");
 
-            lblDiagonal.Text = $"{diagCm}cm {diagPol}\"";
-            lblAltura.Text = $"{altCm}cm {altPol}\"";
-            lblLargura.Text = $"{largCm}cm {largPol}\"";
+            lblDiagonal.Text = $"{diagCm}cm - {diagPol}\"";
+            lblAltura.Text = $"{altCm}cm - {altPol}\"";
+            lblLargura.Text = $"{largCm}cm - {largPol}\"";
         }
     }
 }

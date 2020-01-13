@@ -29,17 +29,24 @@
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="1" Grid.Column="1"
-                   Text="Diagonal:"
-                   FontSize="Large"
-                   VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+            <Picker Grid.Row="1" Grid.Column="1"
+                    x:Name="pkrMedida"
+                    FontSize="Large"
+                    SelectedIndexChanged="Picker_SelectedIndexChanged">
+                <Picker.Items>
+                    <x:String>Diagonal</x:String>
+                    <x:String>Altura</x:String>
+                    <x:String>Largura</x:String>
+                </Picker.Items>
+            </Picker>
             <Entry Grid.Row="1" Grid.Column="3"
                    x:Name="txtInput"
                    HorizontalTextAlignment="Center"
                    TextChanged="Entry_TextChanged"/>
             <Picker Grid.Row="1" Grid.Column="5"
                     x:Name="pkrUnidade"
-                    SelectedIndexChanged="pkrUnidade_SelectedIndexChanged">
+                    FontSize="Large"
+                    SelectedIndexChanged="Picker_SelectedIndexChanged">
                 <Picker.Items>
                     <x:String>pol</x:String>
                     <x:String>cm</x:String>
@@ -53,7 +60,7 @@
             <Label Grid.Row="3" Grid.Column="3"
                    Grid.ColumnSpan="3"
                    x:Name="lblDiagonal"
-                   Text="-cm"
+                   Text="0cm"
                    HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
                    FontSize="Large"/>
             
@@ -64,7 +71,7 @@
             <Label Grid.Row="5" Grid.Column="3"
                    Grid.ColumnSpan="3"
                    x:Name="lblAltura"
-                   Text="-cm"
+                   Text="0cm"
                    HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
                    FontSize="Large"/>
 
@@ -75,7 +82,7 @@
             <Label Grid.Row="7" Grid.Column="3" 
                    Grid.ColumnSpan="3"
                    x:Name="lblLargura"
-                   Text="-cm"
+                   Text="0cm"
                    HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
                    FontSize="Large"/>
         </Grid>
